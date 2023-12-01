@@ -1,4 +1,4 @@
 <?php
-require 'class.php';
+require './Class/livres.php';
 
 $l1 = new Livres();
