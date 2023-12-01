@@ -38,7 +38,7 @@ class Librarians extends Users {
         $this->$var = $modif;
     }
 
-    public function bookRegister ($title,$author,$datePubli,$editor,$genres,$biblio){
+    public function bookRegister ($title,$author,$datePubli,$editor,$genres,Biblios $biblio){
         // Créer un nouvel objet Livres()
         $livre = new Books($title,$author,$datePubli,$editor,$genres);
         // Ajouter le livre à la bibliothèque
@@ -46,7 +46,7 @@ class Librarians extends Users {
         echo "Le livre $livre->title a été ajouté avec succès.\n";
     }
 
-    public function discRegister ($title,$datePubli,$genres,$artist,$biblio){
+    public function discRegister ($title,$datePubli,$genres,$artist,Biblios $biblio){
         // Créer un nouvel objet Discs()
         $disc = new Discs($title,$datePubli,$genres,$artist);
         // Ajouter le livre à la bibliothèque
@@ -60,6 +60,8 @@ class Librarians extends Users {
 class Clients extends Users {
     protected bool $isAccount;
     protected int $cardNumber;
+
+    protected $bookBorrowed = array();
     
     public function __construct(String $name, String $address, String $email, String $tel,bool $isAccount,int $cardNumber){
         $this->isAccount = $isAccount;
@@ -68,6 +70,7 @@ class Clients extends Users {
         $this->email = $email;
         $this->address = $address;
         $this->name = $name;
+        
     }
 
     public function getDetails(){
@@ -89,7 +92,16 @@ class Clients extends Users {
     }
 
     public function displayAllArticles(Biblios $biblio){
-        
+        echo "Tous nos livres : \n";
+        $biblio->displayBooks();
+        echo "\n \n Tous nos disques : \n";
+        $biblio->displayDiscs();
     }
+
+    public function bookBorrow ($title, Biblios $biblio){
+        $transfert = preg_grep ("/$title/",$biblio->books[$title]);
+    }
+
+
 
 }
