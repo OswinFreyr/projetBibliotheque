@@ -57,11 +57,25 @@ class Clients extends Users {
     }
 
     public function getDetails(){
-        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Role : $this->role";
+        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Account ? : $this->isAccount \n Numero carte client : $this->cardNumber ";
     }
 
     public function setDetails ($var,$modif){
         $this->$var = $modif;
+    }
+
+    public function deleteAccount(){
+        if($this->isAccount==true){
+            $this->isAccount = false;
+            echo "Le compte a été supprimé.";
+        }
+        else {
+            echo "Vous ne possédez pas de compte.";
+        }
+    }
+
+    public function displayAllArticles(Biblios $biblio){
+        
     }
 
 }
