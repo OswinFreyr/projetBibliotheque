@@ -1,12 +1,12 @@
 <?php
 
 abstract class Articles {
-    protected $title;
-    protected $datePubli;
-    protected $genres = array();
+    public $title;
+    public $datePubli;
+    public $genres = array();
 }
 
-class Livres extends Articles {
+class Books extends Articles {
     protected $authors = array();
     protected $editor;
 
@@ -31,7 +31,7 @@ class Livres extends Articles {
     }
 }
 
-class Disques extends Articles {
+class Disc extends Articles {
     protected $artists = array();
 
     public function __construct($title, $artists, $datePubli, $genres) {
@@ -50,5 +50,5 @@ class Disques extends Articles {
     }
 }
 
-$l1 = new Livres("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction", "Heroic Fantasy"]);
+$l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction", "Heroic Fantasy"]);
 $l1->afficherDetails();

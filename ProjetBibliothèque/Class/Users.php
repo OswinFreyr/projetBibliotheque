@@ -36,7 +36,7 @@ class Librarians extends Users {
     }
 
     public function bookRegister ($title,$author,$datePubli,$editor,$genres,$biblio){
-        $livre = new Livres($title,$author,$datePubli,$editor,$genres);
+        $livre = new Books($title,$author,$datePubli,$editor,$genres);
         array_push($biblio,$livre);
         echo "Le livre $livre->title a été ajouté avec succès.\n";
     }
@@ -55,6 +55,13 @@ class Clients extends Users {
         $this->address = $address;
         $this->name = $name;
     }
-    
+
+    public function getDetails(){
+        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Role : $this->role";
+    }
+
+    public function setDetails ($var,$modif){
+        $this->$var = $modif;
+    }
 
 }
