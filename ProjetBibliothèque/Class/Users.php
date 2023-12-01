@@ -1,5 +1,13 @@
 <?php
 
+
+// Imports
+
+require 'Articles.php';
+require 'Biblio.php';
+
+//________________________________________________________________________________________________________
+
 abstract class Users {
     protected String $name;
     protected String $address;
@@ -19,5 +27,18 @@ class Librarians extends Users {
         $this->role = $role;
     }
 
-    public function afficherDetails(){}
+    public function getDetails(){
+        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Role : $this->role";
+    }
+
+    public function setDetails ($var,$modif){
+        $this->$var = $modif;
+    }
+
+    public function bookRegister ($title,$author,$datePubli,$editor,$genres,$biblio){
+        $livre = new Livres($title,$author,$datePubli,$editor,$genres);
+        array_push($biblio,$livre);
+        echo "Le livre $livre->title a été ajouté avec succès.\n";
+    }
+
 }
