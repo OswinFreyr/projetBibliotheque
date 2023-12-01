@@ -54,7 +54,7 @@ class Discs extends Articles {
     }
 }
 
-$l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
-$l1->displayDetails();
-$d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
-$d1->displayDetails();
+// $l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
+// $l1->displayDetails();
+// $d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
+// $d1->displayDetails();
