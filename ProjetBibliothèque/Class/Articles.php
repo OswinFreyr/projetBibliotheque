@@ -52,5 +52,5 @@ class Disques extends Articles {
 
 $l1 = new Livres("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction", "Heroic Fantasy"]);
 $l1->afficherDetails();
-$d1 = new Disques("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Video Game"]);
+$d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Video Game"]);
 $d1->afficherDetails();
