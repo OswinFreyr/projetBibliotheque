@@ -27,11 +27,11 @@ class Books extends Articles {
         foreach ($this->genres as $genre) {
             echo " " . $genre ;
         }
-        echo ". ";
+        echo ". \n";
     }
 }
 
-class Disc extends Articles {
+class Discs extends Articles {
     protected $artists = array();
 
     public function __construct($title, $artists, $datePubli, $genres) {
@@ -42,13 +42,19 @@ class Disc extends Articles {
     }
 
     public function afficherDetails() {
-        echo "Le livre " . $this->title . " écrit par : ";
+        echo "Le disque " . $this->title . " composé par : ";
         foreach ($this->artists as $artist) {
             echo $artist .", ";
         }
-        echo "publié le " . $this->datePubli . "\n";
+        echo "publié le " . $this->datePubli . "\nC'est un disque de :";
+        foreach ($this->genres as $genre) {
+            echo " " . $genre ;
+        }
+        echo ". \n";
     }
 }
 
-$l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction", "Heroic Fantasy"]);
-$l1->afficherDetails();
+// $l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
+// $l1->afficherDetails();
+// $d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
+// $d1->afficherDetails();
