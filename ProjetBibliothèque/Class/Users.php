@@ -42,3 +42,19 @@ class Librarians extends Users {
     }
 
 }
+
+class Clients extends Users {
+    protected bool $isAccount;
+    protected int $cardNumber;
+    
+    public function __construct(String $name, String $address, String $email, String $tel,bool $isAccount,int $cardNumber){
+        $this->isAccount = $isAccount;
+        $this->cardNumber = $cardNumber;
+        $this->tel = $tel;
+        $this->email = $email;
+        $this->address = $address;
+        $this->name = $name;
+    }
+    
+
+}
