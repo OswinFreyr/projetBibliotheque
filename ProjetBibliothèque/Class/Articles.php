@@ -1,29 +1,29 @@
 <?php
 
 abstract class Articles {
-    protected $titre;
+    protected $title;
     protected $datePubli;
     protected $genres = array();
 }
 
 class Livres extends Articles {
-    protected $auteurs = array();
-    protected $editeur;
+    protected $authors = array();
+    protected $editor;
 
-    public function __construct($titre, $auteurs, $datePubli, $editeur, $genres) {
-        $this->titre = $titre;
-        $this->auteurs = $auteurs;
+    public function __construct($title, $authors, $datePubli, $editor, $genres) {
+        $this->title = $title;
+        $this->authors = $authors;
         $this->datePubli = $datePubli;
-        $this->editeur = $editeur;
+        $this->editor = $editor;
         $this->genres = $genres;
     }
 
     public function afficherDetails() {
-        echo "Le livre " . $this->titre . " écrit par : ";
-        foreach ($this->auteurs as $auteur) {
-            echo $auteur .", ";
+        echo "Le livre " . $this->title . " écrit par : ";
+        foreach ($this->authors as $author) {
+            echo $author .", ";
         }
-        echo "publié en " . $this->datePubli . " par " . $this->editeur . ". \nC'est un livre de :";
+        echo "publié en " . $this->datePubli . " par " . $this->editor . ". \nC'est un livre de :";
         foreach ($this->genres as $genre) {
             echo " " . $genre ;
         }
@@ -32,19 +32,19 @@ class Livres extends Articles {
 }
 
 class Disques extends Articles {
-    protected $artistes = array();
+    protected $artists = array();
 
-    public function __construct($titre, $artistes, $datePubli, $genres) {
-        $this->titre = $titre;
-        $this->artistes = $artistes;
+    public function __construct($title, $artists, $datePubli, $genres) {
+        $this->title = $title;
+        $this->artists = $artists;
         $this->datePubli = $datePubli;
         $this->genres = $genres;
     }
 
     public function afficherDetails() {
-        echo "Le livre " . $this->titre . " écrit par : ";
-        foreach ($this->artistes as $artiste) {
-            echo $artiste .", ";
+        echo "Le livre " . $this->title . " écrit par : ";
+        foreach ($this->artists as $artist) {
+            echo $artist .", ";
         }
         echo "publié le " . $this->datePubli . "\n";
     }
