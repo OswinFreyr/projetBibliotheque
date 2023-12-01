@@ -7,8 +7,8 @@ abstract class Articles {
 }
 
 class Livres extends Articles {
-    protected $authors = array();
-    protected $editor;
+    public $authors = array();
+    public $editor;
 
     public function __construct($title, $authors, $datePubli, $editor, $genres) {
         $this->title = $title;
@@ -32,7 +32,7 @@ class Livres extends Articles {
 }
 
 class Disques extends Articles {
-    protected $artists = array();
+    public $artists = array();
 
     public function __construct($title, $artists, $datePubli, $genres) {
         $this->title = $title;
@@ -52,3 +52,5 @@ class Disques extends Articles {
 
 $l1 = new Livres("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction", "Heroic Fantasy"]);
 $l1->afficherDetails();
+$d1 = new Disques("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Video Game"]);
+$d1->afficherDetails();
