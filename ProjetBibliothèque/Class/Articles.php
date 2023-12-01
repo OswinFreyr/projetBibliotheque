@@ -18,7 +18,7 @@ class Books extends Articles {
         $this->genres = $genres;
     }
 
-    public function afficherDetails() {
+    public function displayDetails() {
         echo "Le livre " . $this->title . " écrit par : ";
         foreach ($this->authors as $author) {
             echo $author .", ";
@@ -41,7 +41,7 @@ class Discs extends Articles {
         $this->genres = $genres;
     }
 
-    public function afficherDetails() {
+    public function displayDetails() {
         echo "Le disque " . $this->title . " composé par : ";
         foreach ($this->artists as $artist) {
             echo $artist .", ";
@@ -54,7 +54,7 @@ class Discs extends Articles {
     }
 }
 
-// $l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
-// $l1->afficherDetails();
-// $d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
-// $d1->afficherDetails();
+$l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
+$l1->displayDetails();
+$d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
+$d1->displayDetails();
