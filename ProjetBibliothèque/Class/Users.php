@@ -6,10 +6,14 @@
 require_once 'Articles.php';
 require_once 'Biblio.php';
 
+
+
 //________________________________________________________________________________________________________
 
+
+
 class User {
-    // Classe générale, les attributs sont partagés avec Librarians Clients
+    // Classe générale, les attributs sont partagés avec Librarian et Client
     protected String $name;
     protected String $address;
     protected String $email;
@@ -52,11 +56,9 @@ class Client extends User {
             if ($this->isAccount){
                 echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name possède un compte. \n Numero carte client : $this->cardNumber \n$this->name n'a pas encore emprunté d'articles. ";
             }
-            else {
-               
+            else {              
                 echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name ne possède pas de compte.\n$this->name n'a pas encore emprunté d'articles. ";
-            }
-           
+            }          
         }
         else{
             if (!$this->isAccount){
@@ -92,7 +94,12 @@ class Client extends User {
 
     public function bookBorrow ($title, Biblios $biblio){
         $transfert = preg_grep ("/$title/",$biblio->books[$title]);
+        // remove de la liste de livres
+        // ajouter à la liste des emprunts
+        // faire l'inverse pour les rendus
     }
+
+    // faire pareil pour les disques
 
 }
 
@@ -110,7 +117,7 @@ class Librarian extends Client {
     public function discRegister ($title,$datePubli,$genres,$artist,Biblios $biblio){
         // Créer un nouvel objet Discs()
         $disc = new Discs($title,$datePubli,$genres,$artist);
-        // Ajouter le livre à la bibliothèque
+        // Ajouter le disque à la bibliothèque
         array_push($biblio->discs,$disc);
         echo "Le livre $disc->title a été ajouté avec succès.\n";
     }
