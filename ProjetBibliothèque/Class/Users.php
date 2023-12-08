@@ -3,40 +3,101 @@
 
 // Imports
 
-require 'Articles.php';
-require 'Biblio.php';
+require_once 'Articles.php';
+require_once 'Biblio.php';
 
 //________________________________________________________________________________________________________
 
-abstract class Users {
+class User {
     // Classe générale, les attributs sont partagés avec Librarians Clients
     protected String $name;
     protected String $address;
     protected String $email;
     protected String $tel;
 
+    public function __construct(String $name, String $address, String $email, String $tel){
+        $this->tel = $tel;
+        $this->email = $email;
+        $this->address = $address;
+        $this->name = $name;
+        
+    }
+
+    public function displayAllArticles(Biblios $biblio){
+        echo "Tous nos livres : \n";
+        $biblio->displayBooks();
+        echo "\n \n Tous nos disques : \n";
+        $biblio->displayDiscs();
+    }
+
 }
 
-class Librarians extends Users {
-    protected String $role;
 
-    public function __construct(String $name, String $address, String $email, String $tel, String $role) {
-        $this->name = $name;
-        $this->address = $address;
-        $this->email = $email;
-        $this->tel = $tel;
-        $this->role = $role;
+class Client extends User {
+    protected bool $isAccount = true;
+    protected $cardNumber;
+
+    protected $booksBorrowed = array();
+    
+    public function __construct(String $name,String $address,String $email,String $tel,int $cardNumber){
+        parent::__construct( $name, $address, $email, $tel);
+        $this->cardNumber = $cardNumber;
     }
 
     public function getDetails(){
-        // Récupérer les informations du bibliothéquaire
-        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Role : $this->role";
+
+        //verif si emprunts
+        if (empty($this->booksBorrowed)){
+            // verif si compte
+            if ($this->isAccount){
+                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name possède un compte. \n Numero carte client : $this->cardNumber \n$this->name n'a pas encore emprunté d'articles. ";
+            }
+            else {
+               
+                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name ne possède pas de compte.\n$this->name n'a pas encore emprunté d'articles. ";
+            }
+           
+        }
+        else{
+            if (!$this->isAccount){
+                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name possède un compte. \n Numero carte client : $this->cardNumber \nArticles empruntés : " . $this->booksBorrowed;
+            }
+            else {
+                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n $this->name ne possède pas de compte. \nArticles empruntés : " . $this->booksBorrowed;
+            }
+            
+        }
     }
 
-    public function setDetails ($var,$modif){
-        // Modifier le contenu de l'attibut $var par $modif
+    // afficher un detail
+    public function getDetail($detail){
+        return $this->$detail;
+    }
+
+    // modifier un detail
+    public function setDetail ($var,$modif){
         $this->$var = $modif;
     }
+
+    public function deleteAccount(){
+        if($this->isAccount==true){
+            $this->isAccount = false;
+            $this->cardNumber = null;
+            echo "Le compte a été supprimé.";
+        }
+        else {
+            echo "Vous ne possédez pas de compte.";
+        }
+    }
+
+    public function bookBorrow ($title, Biblios $biblio){
+        $transfert = preg_grep ("/$title/",$biblio->books[$title]);
+    }
+
+}
+
+class Librarian extends Client {
+    protected bool $islibrarian = true;
 
     public function bookRegister ($title,$author,$datePubli,$editor,$genres,Biblios $biblio){
         // Créer un nouvel objet Livres()
@@ -57,51 +118,23 @@ class Librarians extends Users {
 
 }
 
-class Clients extends Users {
-    protected bool $isAccount;
-    protected int $cardNumber;
 
-    protected $bookBorrowed = array();
-    
-    public function __construct(String $name, String $address, String $email, String $tel,bool $isAccount,int $cardNumber){
-        $this->isAccount = $isAccount;
-        $this->cardNumber = $cardNumber;
-        $this->tel = $tel;
-        $this->email = $email;
-        $this->address = $address;
-        $this->name = $name;
-        
-    }
+//___________________________________________________________________________
 
-    public function getDetails(){
-        echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  Account ? : $this->isAccount \n Numero carte client : $this->cardNumber ";
-    }
+echo "\n user : \n";
+$user = new User("Patrick Balkany","13 rue de la Fraude","jepossededesthunes@gmail.com","07.56.68.37.19");
+print_r($user);
+echo "\n";
 
-    public function setDetails ($var,$modif){
-        $this->$var = $modif;
-    }
+echo "\n client : \n";
+$client = new Client ("Valérie Pécresse","Métro parisien","jaiunegigadette@gmail.com","06.45.23.86.97",599755);
+print_r($client);
+echo "\n";
+echo "Infos client : \n";
+$client->getDetails();
+// echo($client->getDetail("name"));
 
-    public function deleteAccount(){
-        if($this->isAccount==true){
-            $this->isAccount = false;
-            echo "Le compte a été supprimé.";
-        }
-        else {
-            echo "Vous ne possédez pas de compte.";
-        }
-    }
-
-    public function displayAllArticles(Biblios $biblio){
-        echo "Tous nos livres : \n";
-        $biblio->displayBooks();
-        echo "\n \n Tous nos disques : \n";
-        $biblio->displayDiscs();
-    }
-
-    public function bookBorrow ($title, Biblios $biblio){
-        $transfert = preg_grep ("/$title/",$biblio->books[$title]);
-    }
-
-
-
-}
+echo "\n librarian : \n";
+$librarian = new Librarian("Marlène Schiappa","12 rue de la pose","jijoijoi@gmail.com","09.45.69.78.45",84616);
+print_r($librarian);
+$librarian->getDetails();
