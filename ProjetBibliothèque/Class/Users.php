@@ -1,8 +1,5 @@
 <?php
-
-
 // Imports
-
 require_once 'Articles.php';
 require_once 'Biblio.php';
 
@@ -24,7 +21,6 @@ class User {
         $this->email = $email;
         $this->address = $address;
         $this->name = $name;
-        
     }
 
     public function displayAllArticles(Biblios $biblio){
@@ -54,18 +50,40 @@ class Client extends User {
         if (empty($this->booksBorrowed)){
             // verif si compte
             if ($this->isAccount){
-                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name possède un compte. \n Numero carte client : $this->cardNumber \n$this->name n'a pas encore emprunté d'articles. ";
+                echo "Nom : . $this->name  \n  
+                Adress : $this->address  \n  
+                Tel : $this->tel  \n  
+                Email : $this->email  \n  
+                $this->name possède un compte. \n 
+                Numero carte client : $this->cardNumber \n$
+                this->name n'a pas encore emprunté d'articles. ";
             }
             else {              
-                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name ne possède pas de compte.\n$this->name n'a pas encore emprunté d'articles. ";
+                echo "Nom : . $this->name  \n  
+                Adress : $this->address  \n  
+                Tel : $this->tel  \n  
+                Email : $this->email  \n  
+                $this->name ne possède pas de compte.\n
+                $this->name n'a pas encore emprunté d'articles. ";
             }          
         }
         else{
             if (!$this->isAccount){
-                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n  $this->name possède un compte. \n Numero carte client : $this->cardNumber \nArticles empruntés : " . $this->booksBorrowed;
+                echo "Nom : . $this->name  \n  
+                Adress : $this->address  \n  
+                Tel : $this->tel  \n  
+                Email : $this->email  \n  
+                $this->name possède un compte. \n 
+                Numero carte client : $this->cardNumber \n
+                Articles empruntés : " . $this->booksBorrowed;
             }
             else {
-                echo "Nom : . $this->name  \n  Adress : $this->address  \n  Tel : $this->tel  \n  Email : $this->email  \n $this->name ne possède pas de compte. \nArticles empruntés : " . $this->booksBorrowed;
+                echo "Nom : . $this->name  \n  
+                Adress : $this->address  \n  
+                Tel : $this->tel  \n  
+                Email : $this->email  \n 
+                this->name ne possède pas de compte. \
+                Articles empruntés : " . $this->booksBorrowed;
             }
             
         }
@@ -94,9 +112,19 @@ class Client extends User {
 
     public function bookBorrow ($title, Biblios $biblio){
         $transfert = preg_grep ("/$title/",$biblio->books[$title]);
-        // remove de la liste de livres
-        // ajouter à la liste des emprunts
-        // faire l'inverse pour les rendus
+        if ($transfert[0]->getDetail("isDispo") == true) {
+            $transfert[0]->setDetail("isDispo", false);
+            $this->booksBorrowed.array_push($transfert);
+        }
+        else {
+            return "Le livre $title est déjà emprunté.";
+        }
+    }
+
+    public function bookRender ($title, Biblios $biblio){
+        array_splice($this->booksBorrowed,$title);
+        $transfert = preg_grep ("/$title/",$biblio->books[$title]);
+        $transfert[0]->setDetail("isDispo", true);
     }
 
     // faire pareil pour les disques
@@ -121,12 +149,10 @@ class Librarian extends Client {
         array_push($biblio->discs,$disc);
         echo "Le livre $disc->title a été ajouté avec succès.\n";
     }
-
-
 }
 
 
-//___________________________________________________________________________
+//___________________________  TESTS   _______________________________
 
 echo "\n user : \n";
 $user = new User("Patrick Balkany","13 rue de la Fraude","jepossededesthunes@gmail.com","07.56.68.37.19");

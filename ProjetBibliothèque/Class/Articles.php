@@ -4,6 +4,8 @@ abstract class Articles {
     public $title;
     public $datePubli;
     public $genres = array();
+
+    public $isDispo = true;
 }
 
 class Books extends Articles {
@@ -29,6 +31,14 @@ class Books extends Articles {
         }
         echo ". \n";
     }
+
+    public function getDetail ($nom){
+        return $this->$nom;
+    }
+
+    public function setDetail ($var , $modif){
+        $this->$var = $modif;
+    }
 }
 
 class Discs extends Articles {
@@ -51,6 +61,14 @@ class Discs extends Articles {
             echo " " . $genre ;
         }
         echo ". \n";
+    }
+
+    public function getDetail ($nom){
+        return $this->$nom;
+    }
+
+    public function setDetail ($var , $modif){
+        $this->$var = $modif;
     }
 }
 
