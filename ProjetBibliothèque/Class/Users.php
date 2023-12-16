@@ -148,10 +148,25 @@ class Client extends User {
     public function bookRender($title, Biblio $biblio) {
         foreach ($this->booksBorrowed as $index => $book) {
             if ($book->title === $title) {
-                foreach ($biblio->books as $indexBiblio => $livreBiblio) {
-                    if ($livreBiblio->title === $title) {
+                foreach ($biblio->books as $indexBiblio => $bookBiblio) {
+                    if ($bookBiblio->title === $title) {
                         $biblio->books[$indexBiblio]->isBorrowed = false;
                         unset($this->booksBorrowed[$index]);
+                        return "Vous avez rendu \"$title\".";
+                    }
+                }
+            }
+        }
+        return "Vous n'aviez pas emprunté \"$title\".";
+    }
+
+    public function discRender($title, Biblio $biblio) {
+        foreach ($this->discsBorrowed as $index => $disc) {
+            if ($disc->title === $title) {
+                foreach ($biblio->discs as $indexBiblio => $discBiblio) {
+                    if ($discBiblio->title === $title) {
+                        $biblio->discs[$indexBiblio]->isBorrowed = false;
+                        unset($this->discsBorrowed[$index]);
                         return "Vous avez rendu \"$title\".";
                     }
                 }
