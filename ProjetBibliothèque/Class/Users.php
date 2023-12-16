@@ -145,7 +145,7 @@ class Client extends User {
     }
 
 
-    public function bookRender($title, $biblio) {
+    public function bookRender($title, Biblio $biblio) {
         foreach ($this->booksBorrowed as $index => $book) {
             if ($book->title === $title) {
                 foreach ($biblio->books as $indexBiblio => $livreBiblio) {
@@ -228,7 +228,7 @@ echo "\n\n\n\n\n\n emprunt : \n";
 $client->bookBorrow("Le Papier Peint Jaune",$biblio);
 print_r($client);
 print_r($biblio);
-$$client->bookRender("Le Papier Peint Jaune",$biblio);
+$client->bookRender("Le Papier Peint Jaune",$biblio);
 print_r($client);
 print_r($biblio);
 // $biblio->displayDiscs();
