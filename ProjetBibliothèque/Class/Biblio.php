@@ -34,4 +34,13 @@ class Biblio {
         }
     }
 
+    public function verifClientExists($name,$email) {
+        foreach ($this->clients as $client) {
+            if ($client->getDetail("name") === $name && $client->getDetail("email") === $email) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
