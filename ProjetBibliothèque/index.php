@@ -5,6 +5,8 @@ require_once('Class/Biblio.php');
 require_once('Class/Users.php');
 
 $biblio = new Biblio("Bibliothèque de Bordeaux");
+// $client = new Client("Inès Bouadil","f","bouadilin@gmail.com","1212",55);
+// $biblio->addClient($client);
 
 $accountCreated = false;
 
@@ -64,12 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php 
 
-    if ($accountCreated){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        echo '<p class="successMessage">Votre compte a été créé avec succès!</p>';
-    }   
-    else {
-        echo '<p class="successMessage">Vous possédez déjà un compte.</p>';
+        if ($accountCreated){
+
+            echo '<p class="successMessage">Votre compte a été créé avec succès!</p>';
+        }   
+        else {
+            echo '<p class="successMessage">Vous possédez déjà un compte.</p>';
+        }
     }
-
 ?>
