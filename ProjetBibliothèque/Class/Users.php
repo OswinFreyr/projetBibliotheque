@@ -54,8 +54,8 @@ class Client extends User {
                 Tel : $this->tel  \n  
                 Email : $this->email  \n  
                 $this->name possède un compte. \n 
-                Numero carte client : $this->cardNumber \n$
-                this->name n'a pas encore emprunté d'articles. ";
+                Numero carte client : $this->cardNumber \n
+                $this->name n'a pas encore emprunté d'articles. ";
             }
             else {              
                 echo "Nom : . $this->name  \n  
@@ -81,7 +81,7 @@ class Client extends User {
                 Adress : $this->address  \n  
                 Tel : $this->tel  \n  
                 Email : $this->email  \n 
-                this->name ne possède pas de compte. \
+                $this->name ne possède pas de compte. \
                 Articles empruntés : " . $this->booksBorrowed;
             }
             
