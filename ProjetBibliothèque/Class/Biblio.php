@@ -1,6 +1,6 @@
 <?php
 
-class Biblios {
+class Biblio {
     public $name;
     public $books = array();
     public $discs = array();

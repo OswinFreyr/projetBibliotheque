@@ -5,7 +5,7 @@ abstract class Articles {
     public $datePubli;
     public $genres = array();
 
-    public $isDispo = true;
+    public $isBorrowed = false;
 }
 
 class Books extends Articles {
