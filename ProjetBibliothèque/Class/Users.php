@@ -109,6 +109,17 @@ class Client extends User {
         }
     }
 
+    public function createAccount($cardNumber){
+        if($this->isAccount==false){
+            $this->isAccount = true;
+            $this->cardNumber = $cardNumber;
+            echo "Le compte a été créé.";
+        }
+        else {
+            echo "Vous possédez déjà un compte.";
+        }
+    }
+
     public function bookBorrow ($title, Biblio $biblio){
 
         foreach ($biblio->books as $index => $book) {
