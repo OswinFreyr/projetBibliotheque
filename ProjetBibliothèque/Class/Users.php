@@ -120,6 +120,7 @@ class Client extends User {
         }
     }
 
+    // Emprunter un livre à partir du titre
     public function bookBorrow ($title, Biblio $biblio){
 
         foreach ($biblio->books as $index => $book) {
@@ -132,6 +133,7 @@ class Client extends User {
         return "Le livre \"$title\" n'est pas disponible pour l'emprunt."; 
     }
 
+    // Emprunter un disque à partir du titre
     public function discBorrow ($title, Biblio $biblio){
 
         foreach ($biblio->discs as $index => $disc) {
@@ -145,6 +147,7 @@ class Client extends User {
     }
 
 
+    // Rendre un livre
     public function bookRender($title, Biblio $biblio) {
         foreach ($this->booksBorrowed as $index => $book) {
             if ($book->title === $title) {
@@ -160,6 +163,7 @@ class Client extends User {
         return "Vous n'aviez pas emprunté \"$title\".";
     }
 
+    // Rendre un disque
     public function discRender($title, Biblio $biblio) {
         foreach ($this->discsBorrowed as $index => $disc) {
             if ($disc->title === $title) {
@@ -179,6 +183,7 @@ class Client extends User {
 class Librarian extends Client {
     protected bool $islibrarian = true;
 
+    // Ajouter un livre à la bibliothèque
     public function bookRegister ($title,$author,$datePubli,$editor,$genres,Biblio $biblio){
         // Créer un nouvel objet Livres()
         $livre = new Books($title,$author,$datePubli,$editor,$genres);
@@ -187,6 +192,7 @@ class Librarian extends Client {
         echo "Le livre $livre->title a été ajouté avec succès.\n";
     }
 
+    // Ajouter un disque à la bibliothèque
     public function discRegister ($title,$datePubli,$genres,$artist,Biblio $biblio){
         // Créer un nouvel objet Discs()
         $disc = new Discs($title,$datePubli,$genres,$artist);

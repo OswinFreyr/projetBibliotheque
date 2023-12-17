@@ -71,14 +71,3 @@ class Discs extends Articles {
         $this->$var = $modif;
     }
 }
-
-// $l1 = new Books("SDA", ["JRR Tolkien"], 1975, "none", ["Fiction,", "Heroic Fantasy"]);
-// $l1->displayDetails();
-// echo($l1->getDetail("title") . "\n");
-// $l1->setDetail("editor", "Allen & Unwin");
-// $l1->displayDetails();
-// $d1 = new Discs("BG3 Soundtrack", ["Boris Slavov"], 2023, ["Jeux Videos"]);
-// $d1->displayDetails();
-// echo($d1->getDetail("title") . "\n");
-// $d1->setDetail("title", "Baldur's Gate 3 Original Soundtrack");
-// $d1->displayDetails();

@@ -32,23 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cardNumberExists = $biblio->verifCardNumerExists($cardNumber);
             if (!$cardNumberExists){
                 $newClient = new Client($name, $address, $email, $tel, $cardNumber);
+                // Ajouter le client à la bibliothèque
                 $biblio->addClient($newClient); 
-                // echo "Le client $name a été créé avec succès!";
                 $accountCreated = true;
                 $validateCardNumber = true;
             }
         }  
     } 
-    // else {
-    //     echo "Ce client existe déjà!";
-    // }
 }
 
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,10 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
+
     <h2>Bienvenue</h2>
+
+    <!-- Fromulaire de création de compte (=client) -->
     <form method="post" action="index.php" class="client-form">
         <label for="name">Nom :</label><br>
         <input type="text" id="name" name="name" required><br>
@@ -72,21 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" id="tel" name="tel" required><br>
         <input type="submit" value="Créer un compte">
     </form>
-    
-
 
 </body>
 </html>
 
 <?php 
-
+    // Vérifier si des information ont été envoyées
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($accountCreated){
-
+            // Affichage d'un message de succès si le compte à été créé
             echo '<p class="successMessage">Votre compte a été créé avec succès!</p>';
         }   
         else {
+            // Affichage d'un message d'échec si le client possède déjà un compte
             echo '<p class="successMessage">Vous possédez déjà un compte.</p>';
         }
     }

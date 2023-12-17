@@ -37,18 +37,22 @@ class Biblio {
     public function verifClientExists($name,$email) {
         foreach ($this->clients as $client) {
             if ($client->getDetail("name") === $name && $client->getDetail("email") === $email) {
+                // Retourne true dès qu'une correspopndance est trouvée et sort de la fonction
                 return true;
             }
         }
+        // retourne false si aucune correspondance
         return false;
     }
 
     public function verifCardNumerExists ($cardNumber){
         foreach ($this->clients as $client){
             if ($client->cardNumber === $cardNumber) {
+                // Retourne true dès qu'une correspopndance est trouvée et sort de la fonction
                 return true;
             }
         }
+        // retourne false si aucune correspondance
         return false;
     }
 

@@ -44,7 +44,7 @@ $biblio->addDisc($disc);
 $biblio->addLibrarian($librarian);
 // print_r($biblio);
 
-// ______________________ TEST EMPRUNT RENDU __________________________
+// ______________________ TEST EMPRUNT / RENDU __________________________
 
 echo "\n\n\n\n\n\n emprunt : \n";
 $client->bookBorrow("Le Papier Peint Jaune",$biblio);
