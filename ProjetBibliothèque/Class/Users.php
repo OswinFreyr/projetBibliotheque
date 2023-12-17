@@ -2,9 +2,6 @@
 // Imports
 require_once 'Articles.php';
 require_once 'Biblio.php';
-//________________________________________________________________________________________________________
-
-
 
 class User {
     // Classe générale, les attributs sont partagés avec Librarian et Client
