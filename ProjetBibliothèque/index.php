@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Bienvenue</h2>
 
     <!-- Fromulaire de création de compte (=client) -->
-    <form method="post" action="index.php" class="client-form">
+    <form method="post" action="index.php" id="form">
         <label for="name">Nom :</label><br>
         <input type="text" id="name" name="name" required><br>
         <label for="address">Adresse :</label><br>
