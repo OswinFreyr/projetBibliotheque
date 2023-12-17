@@ -1,29 +1,43 @@
 <?php
-
+// import des classes
 require_once('Class/Articles.php');
 require_once('Class/Biblio.php');
 require_once('Class/Users.php');
 
+// Création de la bilbiothèque
 $biblio = new Biblio("Bibliothèque de Bordeaux");
+
+// Création d'un client pour vérifier si le message d'erreur apparaît bien si le client entré dans le form existe déjà
 // $client = new Client("Inès Bouadil","f","bouadilin@gmail.com","1212",55);
 // $biblio->addClient($client);
 
 $accountCreated = false;
 
+// Récupération des information entrées dans le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
     $address = $_POST['address'] ?? '';
     $email = $_POST['email'] ?? '';
     $tel = $_POST['tel'] ?? '';
 
+    // Vérifier si le client existe
     $clientExists = $biblio->verifClientExists($name, $email); 
 
     if (!$clientExists) {
-        $cardNumber = rand(1000, 9999);
-        $newClient = new Client($name, $address, $email, $tel, $cardNumber);
-        $biblio->addClient($newClient); 
-        // echo "Le client $name a été créé avec succès!";
-        $accountCreated = true;
+        $validateCardNumber = false;
+        while ($validateCardNumber=false){
+            // Génération aléatoire d'un numéro de carte
+            $cardNumber = rand(1000, 9999);
+            // Vérifier si le numéro de carte existe pour un autre client
+            $cardNumberExists = $biblio->verifCardNumerExists($cardNumber);
+            if (!$cardNumberExists){
+                $newClient = new Client($name, $address, $email, $tel, $cardNumber);
+                $biblio->addClient($newClient); 
+                // echo "Le client $name a été créé avec succès!";
+                $accountCreated = true;
+                $validateCardNumber = true;
+            }
+        }  
     } 
     // else {
     //     echo "Ce client existe déjà!";

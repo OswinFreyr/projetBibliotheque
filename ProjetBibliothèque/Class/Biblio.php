@@ -43,4 +43,13 @@ class Biblio {
         return false;
     }
 
+    public function verifCardNumerExists ($cardNumber){
+        foreach ($this->clients as $client){
+            if ($client->cardNumber === $cardNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
