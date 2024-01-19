@@ -8,7 +8,7 @@ require_once('Class/Users.php');
 $biblio = new Biblio("Bibliothèque de Bordeaux");
 
 // Création d'un client pour vérifier si le message d'erreur apparaît bien si le client entré dans le form existe déjà
-// $client = new Client("Inès Bouadil","f","bouadilin@gmail.com","1212",55);
+// $client = new Client("Carol Rider","f","carider@mail.com","1212",55);
 // $biblio->addClient($client);
 
 $accountCreated = false;
